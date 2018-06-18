@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Webpack 3 Quickstarter</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400" rel="stylesheet">
+<link href="./assets/css/app.css" rel="stylesheet"></head>   
+<body>
+    <header class="header">
+        <nav class="nav">
+            <h1 class="nav__headline">Event</h1>
+            <ul class="nav__menu">
+                <li class="nav__item nav__search">Search Event</li>
+                <li class="nav__item nav__create">Create Event</li>
+                <li class="nav__item">Sign In</li>
+                <li class="nav__item">Help</li>
+            </ul>
+        </nav>
+        <div class="image"></div>
+    </header>
+    <main class="main">
+        <form class="form">
+            <h1 class="form__headline">Find your next experience</h1>
+            <div class="form__container">
+                <input type="text" class="form__item">
+                <input type="text" class="form__item">
+                <select name="" id="" class="form__item">
+                    <option value="" selected="selected">All Dates</option>
+                </select>
+                <button class="form__button">Search</button>
+            </div>
+        </form>
+        <form class="event" onsubmit="return false">
+            <label for="" class="event__label">
+                Event title
+                <input type="text" class="event__input">
+                <p class="event__warning"></p>
+            </label>
+            
+            <label for="" class="event__label">
+               Event description
+                <textarea name="" id="" cols="30" rows="10" class="event__input"></textarea>
+                <p class="event__warning"></p>
+            </label>
+            <label for="" class="event__label">
+                Location
+                <input id="pac-input" class="controls event__input" type="text" placeholder="Search Box">
+                <div id="map"></div>
+                <p class="event__warning"></p>
+            </label>           
+            <div class="date">
+                <p class="date__title">Date:</p>
+                <label for="">
+                    From:
+                    <input type="date" class="event__input">
+                </label>
+                <label for="">
+                    To:
+                    <input type="date" class="event__input">
+                </label>
+                <div class="date__warning">
+                    <p class="event__warning"></p>
+                    <p class="event__warning"></p>
+                </div>
+            </div>
+            <label for="" class="event__label">
+                Event image
+                <input type="text" class="event__input">
+                <p class="event__warning"></p>
+            </label>
+            <label for="" class="event__label">
+                Category
+                <select name="" id="" class="event__input">
+                    <option value="sport">Sport</option>
+                    <option value="muzyka">Muzyka</option>
+                    <option value="taniec">Taniec</option>
+                    <option value="impreza">Impreza</option>
+                    <option value="teatr">Teatr</option>
+                </select>
+                <p class="event__warning"></p>
+            </label>
+            <button class="event__button">Add event</button>
+        </form>
+        <div class="list"> 
+        </div>
+    </main>
+    <footer class="footer">
+        
+    </footer>
+        
+    <script>
+        function initAutocomplete() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: -33.8688, lng: 151.2195},
+                  zoom: 13,
+                  mapTypeId: 'roadmap'
+                });
+
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+              searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+              var places = searchBox.getPlaces();
+
+              if (places.length == 0) {
+                return;
+              }
+
+              // Clear out the old markers.
+              markers.forEach(function(marker) {
+                marker.setMap(null);
+              });
+              markers = [];
+
+              // For each place, get the icon, name and location.
+              var bounds = new google.maps.LatLngBounds();
+            
+            
+                
+            /*searchBox.setAttribute("lat", bounds.)*/
+                
+              places.forEach(function(place) {
+                if (!place.geometry) {
+                  console.log("Returned place contains no geometry");
+                  return;
+                }
+                
+                var icon = {
+                  url: place.icon,
+                  size: new google.maps.Size(71, 71),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(17, 34),
+                  scaledSize: new google.maps.Size(25, 25)
+                };
+
+                // Create a marker for each place.
+                markers.push(new google.maps.Marker({
+                  map: map,
+                  icon: icon,
+                  title: place.name,
+                  position: place.geometry.location
+                }));
+                  
+            
+                if (place.geometry.viewport) {
+                  // Only geocodes have viewport.
+                  bounds.union(place.geometry.viewport);
+                } else {
+                  bounds.extend(place.geometry.location);
+                }
+                  
+                console.log(bounds.f.b);
+                console.log(bounds.b.f);
+                  
+                input.setAttribute("Lat", bounds.f.b);
+                input.setAttribute("Lng", bounds.b.f);
+              });
+              map.fitBounds(bounds);
+            });
+          }
+
+    </script>
+    
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEDh9fPthm30vwnwkFLiactvg7D_7meyU&libraries=places&callback=initAutocomplete&sensor=false"
+         async defer></script> 
+    
+<script type="text/javascript" src="./assets/js/app.bundle.js"></script></body>
+</html>
