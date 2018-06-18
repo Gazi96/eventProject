@@ -209,7 +209,7 @@ function saveData(eventList){
     } 
 }  
 
-function getData(eventList){
+function getDataFromDatabase(eventList){
     var transaction = db.transaction(["customers"]);
     var objectStore = transaction.objectStore("customers");
     var request = objectStore.get("444-44-4444");
