@@ -6,28 +6,33 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Webpack 3 Quickstarter</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 <link href="./assets/css/app.css" rel="stylesheet"></head>   
 <body>
     <header class="header">
         <nav class="nav">
             <h1 class="nav__headline">Event</h1>
+            <i class="fa fa-bars nav__menu--mobile nav__hamburger" aria-hidden="true"></i>
             <ul class="nav__menu">
                 <li class="nav__item nav__search">Search Event</li>
                 <li class="nav__item nav__create">Create Event</li>
-                <li class="nav__item">Sign In</li>
                 <li class="nav__item">Help</li>
             </ul>
         </nav>
         <div class="image"></div>
+        
     </header>
     <main class="main">
-        <form class="form">
+        <form class="form" onsubmit="return false">
             <h1 class="form__headline">Find your next experience</h1>
             <div class="form__container">
-                <input type="text" class="form__item">
-                <input type="text" class="form__item">
-                <select name="" id="" class="form__item">
-                    <option value="" selected="selected">All Dates</option>
+                <input type="text" class="form__item" placeholder="Search by title">
+                <input id="pac-input2" class="controls form__item" type="text" placeholder="Search by location">
+                <div id="map2"></div>
+                <select name="" id="" class="form__item form__item--select">
+                    <option value="" selected="selected">Sort by dates</option>
+                    <option value="closest">Closest days</option>
+                    <option value="farthest">Farthest days</option>
                 </select>
                 <button class="form__button">Search</button>
             </div>
@@ -74,14 +79,13 @@
                 Category
                 <select name="" id="" class="event__input">
                     <option value="sport">Sport</option>
-                    <option value="muzyka">Muzyka</option>
-                    <option value="taniec">Taniec</option>
-                    <option value="impreza">Impreza</option>
-                    <option value="teatr">Teatr</option>
+                    <option value="music">Music</option>
+                    <option value="dance">Dance</option>
+                    <option value="party">Party</option>
+                    <option value="science">Science</option>
                 </select>
                 <p class="event__warning"></p>
             </label>
-            <button class="event__button">Add event</button>
         </form>
         <div class="list"> 
         </div>
@@ -89,19 +93,29 @@
             <div class="info__photo">
                 <img class="info__img">
             </div>
-            <h2 class="info__title">Title</h2>
+            <div class="info__elements">
+                <h2 class="info__title"></h2>
+                <div class="info__element">
+                    <i class="fa fa-pencil-square-o icon icon--edit" aria-hidden="true"></i>
+                    <i class="fa fa-trash icon icon--remove" aria-hidden="true"></i>
+                </div>
+            </div>
             <h3 class="info__date"></h3>
             <h3 class="info__location"></h3>
-            <p class="event__description"></p>
-            <div id="map"></div>
-            <p class="info__distance"></p>
-            <p class="info__days"></p>
+            <p class="info__category"></p>
+            <p class="info__description"></p>
+            <div class="additional__info">
+                <p class="info__distance"></p>
+                <p class="info__time"></p>
+                <p class="info__days"></p>
+            </div>
+            <div id="map__position"></div>
         </div>
     </main>
     <footer class="footer"></footer>
 
-        
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEDh9fPthm30vwnwkFLiactvg7D_7meyU&libraries=places"></script> 
-    
+        
 <script type="text/javascript" src="./assets/js/app.bundle.js"></script></body>
 </html>
